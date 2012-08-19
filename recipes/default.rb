@@ -19,16 +19,10 @@
 
 case node['platform']
 when "ubuntu","debian"
-  bash "add apt key" do
-    code "apt-key adv --keyserver subkeys.pgp.net --recv-keys 175E41DF"
-    action :nothing
-    notifies :run, resources(:bash => "apt-get update"), :immediately
-  end
-
-  template "/etc/apt/sources.list.d/asterisk.list" do
-    source "asterisk.list.erb"
-    mode 0644
-    notifies :run, resources(:bash => "add apt key"), :immediately
+  apt_repository "asterisk" do
+    uri "http://packages.asterisk.org/deb"
+    components ["lucid", "main"]
+    action :add
   end
 end
 
