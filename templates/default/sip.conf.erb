@@ -5,7 +5,7 @@ allowoverlap = <%= node[:asterisk][:sip_conf_allowoverlap] %>
 allowtransfer = <%= node[:asterisk][:sip_conf_allowtransfer] %>
 bindport = <%= node[:asterisk][:sip_conf_bindport] %>
 bindaddr = <%= node[:asterisk][:sip_conf_bindaddr] %>
-localnet = 192.168.1.0/255.255.255.0 
+localnet = 192.168.1.0/255.255.255.0
 tcpenable = <%= node[:asterisk][:sip_conf_tcpenable] %>
 tcpbindaddr = <%= node[:asterisk][:sip_conf_bindaddr] %>
 srvlookup = <%= node[:asterisk][:sip_conf_srvlookup] %>
@@ -77,7 +77,7 @@ externip = <%= @external_ip %>	; Address that we're going to put in outbound SIP
 ;rtupdate=yes			; Send registry updates to database using realtime? (yes|no)
 				; If set to yes, when a SIP UA registers successfully, the ip address,
 				; the origination port, the registration period, and the username of
-				; the UA will be set to database via realtime. 
+				; the UA will be set to database via realtime.
 				; If not present, defaults to 'yes'.
 ;rtautoclear=yes		; Auto-Expire friends created on the fly on the same schedule
 				; as if it had just registered? (yes|no|<seconds>)
@@ -95,8 +95,8 @@ externip = <%= @external_ip %>	; Address that we're going to put in outbound SIP
 				;
 				; For realtime peers, when the peer is retrieved from realtime storage,
 				; the registration information will be used regardless of whether
-				; it has expired or not; if it expires while the realtime peer 
-				; is still in memory (due to caching or other reasons), the 
+				; it has expired or not; if it expires while the realtime peer
+				; is still in memory (due to caching or other reasons), the
 				; information will not be removed from realtime storage
 
 

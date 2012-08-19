@@ -39,9 +39,9 @@ exten => <%= user[:extension] %>, 1, Dial(SIP/<%= user[:username] %>, 10)
 
 [tollfree]
 exten => _411, 1, Dial(SIP/18004664411@proxy.ideasip.com,60)
-exten => _1800NXXXXXX,1,Dial(SIP/${EXTEN}@proxy.ideasip.com,60) 
-exten => _1888NXXXXXX,1,Dial(SIP/${EXTEN}@proxy.ideasip.com,60) 
-exten => _1877NXXXXXX,1,Dial(SIP/${EXTEN}@proxy.ideasip.com,60) 
+exten => _1800NXXXXXX,1,Dial(SIP/${EXTEN}@proxy.ideasip.com,60)
+exten => _1888NXXXXXX,1,Dial(SIP/${EXTEN}@proxy.ideasip.com,60)
+exten => _1877NXXXXXX,1,Dial(SIP/${EXTEN}@proxy.ideasip.com,60)
 exten => _1866NXXXXXX,1,Dial(SIP/${EXTEN}@proxy.ideasip.com,60)
 
 [seven-digit]
@@ -58,7 +58,7 @@ exten => _[A-Z].@gmail.com,1,Dial(gtalk/google/${EXTEN}@gmail.com)
 exten => _1XXXXXXXXXX,1,Dial(gtalk/google/+${EXTEN}@voice.google.com)
 exten => _+1XXXXXXXXXX,1,Dial(gtalk/google/+${EXTEN}@voice.google.com)
 
-[dial-uri] 
+[dial-uri]
 exten => _[a-z].,1,Dial(SIP/${EXTEN}@${SIPDOMAIN},120,tr)
 exten => _[A-Z].,1,Dial(SIP/${EXTEN}@${SIPDOMAIN},120,tr)
 exten => _X.,1,Dial(SIP/${EXTEN}@${SIPDOMAIN},120,tr)
