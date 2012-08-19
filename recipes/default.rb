@@ -24,6 +24,8 @@ when "ubuntu","debian"
     components ["lucid", "main"]
     action :add
   end
+
+  execute "apt-get update"
 end
 
 packages = case node[:platform]
@@ -35,18 +37,12 @@ when "arch"
 end
 
 packages.each do |pkg|
-  package pkg
-end
-
-asterisk_service_name = case node[:platform]
-when "ubuntu","debian"
-  "asterisk-1.8"
-when "arch"
-  "asterisk"
+  package pkg do
+    options "--force-yes"
+  end
 end
 
 service "asterisk" do
-  service_name asterisk_service_name
   supports :restart => true, :reload => true, :status => :true, :debug => :true,
     "logger-reload" => true, "extensions-reload" => true,
     "restart-convenient" => true, "force-reload" => true
