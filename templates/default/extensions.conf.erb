@@ -70,3 +70,10 @@ exten => _+1XXXXXXXXXX,1,Dial(gtalk/google/+${EXTEN}@voice.google.com)
 exten => _[a-z].,1,Dial(SIP/${EXTEN}@${SIPDOMAIN},120,tr)
 exten => _[A-Z].,1,Dial(SIP/${EXTEN}@${SIPDOMAIN},120,tr)
 exten => _X.,1,Dial(SIP/${EXTEN}@${SIPDOMAIN},120,tr)
+
+<% @dialplan_contexts.each do |context| %>
+[<%= context[:name] %>]
+<% context[:entries].each do |entry| %>
+<%= entry %>
+<% end %>
+<% end %>
