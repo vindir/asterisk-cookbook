@@ -109,5 +109,5 @@ secret=<%= user[:password] %>
 type=friend
 callerid="<%= user[:full_name] %> <<%= user[:username] %>>"
 host=dynamic
-context=outbound
+context=<%= user[:context] %>
 <% end %>
