@@ -6,9 +6,11 @@ allowguest=yes
 disallow=all
 allow=ulaw
 
+<% if @auth %>
 [gtalk]
 username=<%= @auth[:username] %>
 disallow=all
 allow=ulaw
 context=google-in
 connection=google
+<% end %>

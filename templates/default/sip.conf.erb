@@ -103,11 +103,11 @@ externip = <%= @external_ip %>	; Address that we're going to put in outbound SIP
 [authentication]
 
 <% @users.each do |user| %>
-[<%= user[:username] %>]
-defaultuser=<%= user[:username] %>
-secret=<%= user[:password] %>
+[<%= user['username'] %>]
+defaultuser=<%= user['username'] %>
+secret=<%= user['password'] %>
 type=friend
-callerid="<%= user[:full_name] %> <<%= user[:username] %>>"
+callerid="<%= user['full_name'] %> <<%= user['username'] %>>"
 host=dynamic
-context=<%= user[:context] %>
+context=<%= user['context'] %>
 <% end %>

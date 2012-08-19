@@ -59,7 +59,7 @@ dialplan_contexts = search(:asterisk_contexts) || []
     owner "asterisk"
     group "asterisk"
     mode 0644
-    variables :external_ip => external_ip, :users => users, :auth => (auth[0] || {}), :dialplan_contexts => dialplan_contexts
+    variables :external_ip => external_ip, :users => users, :auth => auth[0], :dialplan_contexts => dialplan_contexts
     notifies :reload, resources(:service => "asterisk")
   end
 end
