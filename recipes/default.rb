@@ -19,26 +19,21 @@
 
 case node['platform']
 when "ubuntu","debian"
+  execute "update-asterisk-repo" do
+    command "apt-get update"
+  end
+
   apt_repository "asterisk" do
     uri "http://packages.asterisk.org/deb"
     components ["lucid", "main"]
     action :add
+    notifies :run, "execute[update-asterisk-repo]", :immediately
   end
 
-  execute "apt-get update"
-end
-
-packages = case node[:platform]
-when "ubuntu","debian"
-  %w{asterisk-1.8 asterisk-dahdi}
-when "arch"
-  # Install from the AUR
-  []
-end
-
-packages.each do |pkg|
-  package pkg do
-    options "--force-yes"
+  %w{asterisk-1.8 asterisk-dahdi}.each do |pkg|
+    package pkg do
+      options "--force-yes"
+    end
   end
 end
 
