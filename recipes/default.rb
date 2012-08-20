@@ -19,15 +19,14 @@
 
 case node['platform']
 when "ubuntu","debian"
-  execute "update-asterisk-repo" do
-    command "apt-get update"
-  end
-
   apt_repository "asterisk" do
     uri "http://packages.asterisk.org/deb"
     components ["lucid", "main"]
     action :add
-    notifies :run, "execute[update-asterisk-repo]", :immediately
+  end
+
+  execute "update-asterisk-repo" do
+    command "apt-get update"
   end
 
   %w{asterisk-1.8 asterisk-dahdi}.each do |pkg|
