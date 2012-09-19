@@ -19,17 +19,19 @@
 
 case node['platform']
 when "ubuntu","debian"
-  apt_repository "asterisk" do
-    uri "http://packages.asterisk.org/deb"
-    components ["lucid", "main"]
-    action :add
+  if node['asterisk']['use_digium_repo']
+    apt_repository "asterisk" do
+      uri "http://packages.asterisk.org/deb"
+      components ["lucid", "main"]
+      action :add
+    end
+
+    execute "update-asterisk-repo" do
+      command "apt-get update"
+    end
   end
 
-  execute "update-asterisk-repo" do
-    command "apt-get update"
-  end
-
-  %w{asterisk-1.8 asterisk-dahdi}.each do |pkg|
+  node['asterisk']['packages'].each do |pkg|
     package pkg do
       options "--force-yes"
     end
