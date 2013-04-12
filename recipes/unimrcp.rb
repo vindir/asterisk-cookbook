@@ -75,14 +75,36 @@ bash "install_unimrcp" do
   EOH
 end
 
+directory "/var/lib/asterisk/documentation/thirdparty" do
+  owner "asterisk"
+  group "asterisk"
+  mode 0644
+  action :create
+end
+
 bash "install_asterisk_modules" do
   user "root"
   cwd work_dir
   code <<-EOH
-    mkdir -p /var/lib/asterisk/documentation/thirdparty
     cd #{unimrcp_src_dir}/modules
     ./configure
     make
     make install
   EOH
+end
+
+bash "ldconfig" do
+  user "root"
+  cwd work_dir
+  code <<-EOH
+    ldconfig
+  EOH
+end
+
+template "/etc/asterisk/mrcp.conf" do
+  source "mrcp.conf.erb"
+  owner "asterisk"
+  group "asterisk"
+  mode 0644
+  notifies :reload, resources(:service => "asterisk")
 end
