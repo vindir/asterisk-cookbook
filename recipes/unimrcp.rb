@@ -75,6 +75,13 @@ bash "install_unimrcp" do
   EOH
 end
 
+directory "/var/lib/asterisk/documentation" do
+  owner "asterisk"
+  group "asterisk"
+  mode 0644
+  action :create
+end
+
 directory "/var/lib/asterisk/documentation/thirdparty" do
   owner "asterisk"
   group "asterisk"
