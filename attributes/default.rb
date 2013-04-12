@@ -80,3 +80,9 @@ default['asterisk']['sip_providers']['flowroute'] = Mash.new(:type => 'friend', 
 
 # uncomment the following to set an explicit public IP for SIP behind NAT. Default is the current host's ip address (or ec2 public IP if on ec2)
 # asterisk[:public_ip] = '1.2.3.4'
+
+# UniMRCP settings
+default['asterisk']['unimrcp']['version'] = '1.0.0'
+default['asterisk']['unimrcp']['checksum'] = 'be592c3f4b071802adecb517b44f5db140163c64'
+default['asterisk']['unimrcp']['packages'] = %w{}
+default['asterisk']['unimrcp']['install_dir'] = '/usr/local/unimrcp'
