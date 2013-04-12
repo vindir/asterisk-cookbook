@@ -1,11 +1,4 @@
-unimrcp_name = "uni-ast-package-#{node['asterisk']['unimrcp']['version']}"
-work_dir = "/tmp"
-unimrcp_src_dir = "#{work_dir}/#{unimrcp_name}"
-
-apr_src_dir = "#{unimrcp_src_dir}/libs/apr"
-aprutil_src_dir = "#{unimrcp_src_dir}/libs/apr-util"
-sofia_src_dir = "#{unimrcp_src_dir}/libs/sofia"
-
+case node['platform']
 when "ubuntu","debian"
   node['asterisk']['unimrcp']['packages'].each do |pkg|
     package pkg do
@@ -14,42 +7,82 @@ when "ubuntu","debian"
   end
 end
 
+unimrcp_name = "uni-ast-package-#{node['asterisk']['unimrcp']['version']}"
+work_dir = "/tmp"
+unimrcp_src_dir = "#{work_dir}/#{unimrcp_name}"
+
+target_dir = node['asterisk']['unimrcp']['install_dir']
+
+apr_src_dir = "#{unimrcp_src_dir}/unimrcp/libs/apr"
+aprutil_src_dir = "#{unimrcp_src_dir}/unimrcp/libs/apr-util"
+sofia_src_dir = "#{unimrcp_src_dir}/unimrcp/libs/sofia-sip"
+
+
+
 remote_file "#{work_dir}/#{unimrcp_name}.tar.gz" do
   source "http://unimrcp.googlecode.com/files/#{unimrcp_name}.tar.gz"
-  checksum ['asterisk']['unimrcp']['checksum']
-  notifies :run, "bash[install_unimrcp]", :immediately
+end
+
+bash "prepare_dir" do
+  user "root"
+  cwd work_dir
+  code <<-EOH
+    tar -zxf #{unimrcp_name}.tar.gz
+  EOH
+end
+
+bash "install_apr" do
+  user "root"
+  cwd work_dir
+  code <<-EOH
+    cd #{apr_src_dir}
+    ./configure --prefix=#{target_dir}
+    make
+    make install
+  EOH
+end
+
+bash "install_apr_util" do
+  user "root"
+  cwd work_dir
+  code <<-EOH
+    cd #{aprutil_src_dir}
+    ./configure --prefix=#{target_dir} --with-apr=#{apr_src_dir}
+    make
+    make install
+  EOH
+end
+
+bash "install_sofia" do
+  user "root"
+  cwd work_dir
+  code <<-EOH
+    cd #{sofia_src_dir}
+    ./configure --with-glib=no
+    make
+    make install
+  EOH
 end
 
 bash "install_unimrcp" do
   user "root"
   cwd work_dir
   code <<-EOH
-    tar -zxf #{unimrcp_name}.tar.gz
-
-    cd #{apr_src_dir}
-    ./configure --prefix=#{node['asterisk']['unimrcp']['install_dir']}
-    make
-    make install
-
-    cd #{aprutil_src_dir}
-    ./configure --prefix=#{node['asterisk']['unimrcp']['install_dir']} --with-apr=#{apr_src_dir}
-    make
-    make install
-
-    cd #{sofia_src_dir}
-    ./configure --with-glib=no
-    make
-    make install
-
     cd #{unimrcp_src_dir}/unimrcp
-    ./configure --prefix=#{node['asterisk']['unimrcp']['install_dir']} --with-apr=#{node['asterisk']['unimrcp']['install_dir']} --with-apr-util=#{node['asterisk']['unimrcp']['install_dir']}
+    ./configure --prefix=#{target_dir} --with-apr=#{target_dir} --with-apr-util=#{target_dir}
     make
     make install
+  EOH
+end
 
-    cd cd #{unimrcp_src_dir}/modules
+bash "install_asterisk_modules" do
+  user "root"
+  cwd work_dir
+  code <<-EOH
+    mkdir -p /var/lib/asterisk/documentation/thirdparty
+    cd #{unimrcp_src_dir}/modules
     ./configure
     make
     make install
   EOH
-  action :nothing
 end
