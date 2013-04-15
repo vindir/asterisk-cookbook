@@ -76,15 +76,11 @@ bash "install_unimrcp" do
 end
 
 directory "/var/lib/asterisk/documentation" do
-  owner "asterisk"
-  group "asterisk"
   mode 0644
   action :create
 end
 
 directory "/var/lib/asterisk/documentation/thirdparty" do
-  owner "asterisk"
-  group "asterisk"
   mode 0644
   action :create
 end
@@ -110,8 +106,6 @@ end
 
 template "/etc/asterisk/mrcp.conf" do
   source "mrcp.conf.erb"
-  owner "asterisk"
-  group "asterisk"
   mode 0644
   notifies :reload, resources(:service => "asterisk")
 end

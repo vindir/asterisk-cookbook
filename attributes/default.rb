@@ -1,5 +1,5 @@
 default['asterisk']['use_digium_repo']  = false
-default['asterisk']['packages']         = ['asterisk']
+default['asterisk']['packages']         = ['asterisk', 'asterisk-dev']
 
 #Setup the Manager.conf file, refer to: http://www.voip-info.org/tiki-index.php?page=Asterisk%20config%20manager.conf
 #[general]
@@ -83,7 +83,7 @@ default['asterisk']['sip_providers']['flowroute'] = Mash.new(:type => 'friend', 
 
 # UniMRCP settings
 default['asterisk']['unimrcp']['version'] = '1.0.0'
-default['asterisk']['unimrcp']['packages'] = %w{pkg-config asterisk-dev}
+default['asterisk']['unimrcp']['packages'] = %w{pkg-config}
 default['asterisk']['unimrcp']['install_dir'] = '/usr/local/unimrcp'
 default['asterisk']['unimrcp']['server_ip'] = '192.168.10.14'
 default['asterisk']['unimrcp']['server_port'] = '5060'
