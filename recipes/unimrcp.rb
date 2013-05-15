@@ -17,8 +17,6 @@ apr_src_dir = "#{unimrcp_src_dir}/unimrcp/libs/apr"
 aprutil_src_dir = "#{unimrcp_src_dir}/unimrcp/libs/apr-util"
 sofia_src_dir = "#{unimrcp_src_dir}/unimrcp/libs/sofia-sip"
 
-
-
 remote_file "#{work_dir}/#{unimrcp_name}.tar.gz" do
   source "http://unimrcp.googlecode.com/files/#{unimrcp_name}.tar.gz"
 end
