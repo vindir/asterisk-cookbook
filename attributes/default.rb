@@ -83,7 +83,7 @@ default['asterisk']['sip_providers']['flowroute'] = Mash.new(:type => 'friend', 
 
 # UniMRCP settings
 default['asterisk']['unimrcp']['version'] = '1.0.0'
-default['asterisk']['unimrcp']['packages'] = %w{pkg-config}
+default['asterisk']['unimrcp']['packages'] = %w{pkg-config build-essential}
 default['asterisk']['unimrcp']['install_dir'] = '/usr/local/unimrcp'
 default['asterisk']['unimrcp']['server_ip'] = '192.168.10.14'
 default['asterisk']['unimrcp']['server_port'] = '5060'
