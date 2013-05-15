@@ -73,14 +73,10 @@ bash "install_unimrcp" do
   EOH
 end
 
-directory "/var/lib/asterisk/documentation" do
-  mode 0644
-  action :create
-end
-
 directory "/var/lib/asterisk/documentation/thirdparty" do
   mode 0644
   action :create
+  recursive true
 end
 
 bash "install_asterisk_modules" do
