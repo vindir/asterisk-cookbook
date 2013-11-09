@@ -15,7 +15,7 @@ source_path = "#{Chef::Config['file_cache_path'] || '/tmp'}/#{source_tarball}"
 remote_file source_tarball do
   source source_url
   path source_path
-  node['asterisk']['source']['checksum']
+  checksum node['asterisk']['source']['checksum']
   backup false
   notifies :create, 'ruby_block[validate asterisk tarball]', :immediately
 end
