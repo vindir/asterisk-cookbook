@@ -72,3 +72,4 @@ end
 end
 
 include_recipe 'asterisk::config'
+include_recipe 'asterisk::init'
