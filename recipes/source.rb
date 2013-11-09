@@ -8,7 +8,8 @@ when "ubuntu","debian"
 end
 
 source_tarball = "asterisk-#{node['asterisk']['source']['version']}.tar.gz"
-source_url =  "http://downloads.asterisk.org/pub/telephony/asterisk/releases/#{source_tarball}"
+source_url =  node['asterisk']['source']['url'] ||
+    "http://downloads.asterisk.org/pub/telephony/asterisk/releases/#{source_tarball}"
 source_path = "#{Chef::Config['file_cache_path'] || '/tmp'}/#{source_tarball}"
 
 remote_file source_tarball do
