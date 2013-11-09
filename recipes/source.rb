@@ -44,7 +44,7 @@ bash "install_asterisk" do
     make
     make install
     make config
-    make samples
+    #{'make samples' if node['asterisk']['source']['install_samples']}
   EOH
   notifies :reload, resources(:service => "asterisk")
 end

@@ -100,3 +100,6 @@ default['asterisk']['source']['checksum'] = 'fefa9def9c8f97c89931f12b29b3ac616ae
 
 # An full download url can be supplied to specify an alternative source tarball location
 default['asterisk']['source']['url']      = nil
+
+# Should the sample config files be installed?
+default['asterisk']['source']['install_samples'] = true
