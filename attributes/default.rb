@@ -1,5 +1,9 @@
 default['asterisk']['install_method']               = 'source'
 
+# Ownership / run-as user
+default['asterisk']['user']                = 'asterisk'
+default['asterisk']['group']               = 'asterisk'
+
 # Package install params
 default['asterisk']['package']['names']             = %w(asterisk asterisk-dev)
 default['asterisk']['package']['repo']['enable']    = false
