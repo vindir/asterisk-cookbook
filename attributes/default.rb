@@ -95,4 +95,5 @@ default['asterisk']['unimrcp']['rtp_port_max'] = '29000'
 
 #Install from source settings
 default['asterisk']['source']['packages'] = %w{build-essential libssl-dev libncurses5-dev libnewt-dev libxml2-dev libsqlite3-dev uuid-dev}
-default['asterisk']['source']['version'] = '11.5.1'
+default['asterisk']['source']['version']  = '11.5.1'
+default['asterisk']['source']['checksum'] = 'fefa9def9c8f97c89931f12b29b3ac616ae1a8454c01c524678163061dcb42b2'
