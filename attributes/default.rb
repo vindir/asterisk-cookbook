@@ -101,6 +101,11 @@ default['asterisk']['unimrcp']['rtp_ip'] = '192.168.10.11'
 default['asterisk']['unimrcp']['rtp_port_min'] = '28000'
 default['asterisk']['unimrcp']['rtp_port_max'] = '29000'
 
+# Path config.  The default bin path is set according to the install method (source vs package)
+default['asterisk']['prefix']['bin']       = nil
+default['asterisk']['prefix']['conf']      = '/etc'
+default['asterisk']['prefix']['state']     = '/var'
+
 #Install from source settings
 default['asterisk']['source']['packages'] = %w{build-essential libssl-dev libcurl4-openssl-dev libncurses5-dev libnewt-dev libxml2-dev libsqlite3-dev uuid-dev}
 default['asterisk']['source']['version']  = '11.5.1'
