@@ -101,5 +101,5 @@ end
 template "/etc/asterisk/mrcp.conf" do
   source "mrcp.conf.erb"
   mode 0644
-  notifies :reload, resources(:service => "asterisk")
+  notifies :reload, resources('service[asterisk]')
 end
