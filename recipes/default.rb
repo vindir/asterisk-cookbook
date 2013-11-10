@@ -1,11 +1,11 @@
 asterisk_user = node['asterisk']['user']
 asterisk_group = node['asterisk']['group']
 
-user node['asterisk']['user'] do
+user asterisk_user do
   system true
 end
 
-group node['asterisk']['group'] do
+group asterisk_group do
   system true
 end
 
