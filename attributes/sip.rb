@@ -54,9 +54,5 @@ default['asterisk']['sip_conf_notifyhold']           = 'yes'
 default['asterisk']['sip_conf_limitonpeers']         = 'yes'
 default['asterisk']['sip_conf_t38pt_udptl']          = 'yes'
 
-# Setup our SIP Providers
-default['asterisk']['sip_providers'] = Mash.new
-default['asterisk']['sip_providers']['flowroute'] = Mash.new(:type => 'friend', :host => 'sip.flowroute.com', :dtmf_mode => 'rfc2833', :context => 'flowroute', :canreinvite => 'no', :allowed_codecs => ['ulaw', 'g729'], :insecure => 'port,invite', :qualify => 'yes')
-
 # Sensible defaults for public ip
 default['asterisk']['public_ip'] = node['ec2'] ? node['ec2']['public_ipv4'] : node['ipaddress']
