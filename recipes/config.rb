@@ -5,7 +5,7 @@ dialplan_contexts = search(:asterisk_contexts) || []
 template "#{node['asterisk']['prefix']['conf']}/asterisk/asterisk.conf" do
   source 'asterisk.conf.erb'
   mode 0644
-  notifies :reload, resources(:service => 'asterisk')
+  notifies :reload, resources('service[asterisk]')
 end
 
 %w{sip manager modules extensions}.each do |template_file|
