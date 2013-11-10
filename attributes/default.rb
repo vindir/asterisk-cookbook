@@ -1,3 +1,6 @@
+default['asterisk']['install_method']               = 'source'
+
+# Package install params
 default['asterisk']['package']['names']             = %w(asterisk asterisk-dev)
 default['asterisk']['package']['repo']['enable']    = false
 default['asterisk']['package']['repo']['url']       = 'http://packages.asterisk.org/deb'
