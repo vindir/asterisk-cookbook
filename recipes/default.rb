@@ -22,26 +22,10 @@ asterisk_group = node['asterisk']['group']
 
 user node['asterisk']['user'] do
   system true
-  home "#{node['asterisk']['prefix']['state']}/lib/asterisk"
-  supports :manage_home => false    # Don't create the directory here
-  not_if do
-    begin
-      Etc.getpwnam asterisk_user
-    rescue
-      nil
-    end
-  end
 end
 
 group node['asterisk']['group'] do
   system true
-  not_if do
-    begin
-      Etc.getgrnam asterisk_group
-    rescue
-      nil
-    end
-  end
 end
 
 service "asterisk" do
@@ -63,11 +47,8 @@ end
     recursive true
   end
 
-  # The chown is used to fix initial permissions after asterisk is installed
-  # The conditional assumes permissions will remain correct afterwords
   execute "#{path} ownership" do
     command "chown -Rf #{asterisk_user}:#{asterisk_group} #{path}"
-    not_if { Etc.getpwuid(File.stat(path).uid).name == asterisk_user and Etc.getgrgid(File.stat(path).gid).name == asterisk_group }
   end
 end
 
