@@ -1,7 +1,7 @@
-node.default['asterisk']['prefix']['bin']       = "/opt/asterisk-#{node['asterisk']['source']['version']}"
+node.default['asterisk']['prefix']['bin'] = "/opt/asterisk-#{node['asterisk']['source']['version']}"
 
 case node['platform']
-when "ubuntu","debian"
+when "ubuntu", "debian"
   node['asterisk']['source']['packages'].each do |pkg|
     package pkg do
       options "--force-yes"

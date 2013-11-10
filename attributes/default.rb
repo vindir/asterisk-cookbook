@@ -1,8 +1,8 @@
-default['asterisk']['install_method']               = 'source'
+default['asterisk']['install_method'] = 'source'
 
 # Ownership / run-as user
-default['asterisk']['user']                = 'asterisk'
-default['asterisk']['group']               = 'asterisk'
+default['asterisk']['user']   = 'asterisk'
+default['asterisk']['group']  = 'asterisk'
 
 # Package install params
 default['asterisk']['package']['names']             = %w(asterisk asterisk-dev)
@@ -13,15 +13,15 @@ default['asterisk']['package']['repo']['branches']  = %w(main)
 default['asterisk']['package']['repo']['keyserver'] = 'pgp.mit.edu'
 default['asterisk']['package']['repo']['key']       = '175E41DF'
 
-#Setup the Manager.conf file, refer to: http://www.voip-info.org/tiki-index.php?page=Asterisk%20config%20manager.conf
-#[general]
+# Setup the Manager.conf file, refer to: http://www.voip-info.org/tiki-index.php?page=Asterisk%20config%20manager.conf
+# [general]
 default['asterisk']['manager_enabled']         = 'yes'
 default['asterisk']['manager_port']            = 5038
 default['asterisk']['manager_ip_address']      = '127.0.0.1'
 default['asterisk']['manager_webenabled']      = 'yes'
 default['asterisk']['manager_timestampevents'] = 'yes'
 
-#[user] section
+# [user] section
 default['asterisk']['manager_username']    = 'manager'
 default['asterisk']['manager_password']    = 'password'
 default['asterisk']['manager_deny']        = '0.0.0.0/0.0.0.0'
@@ -29,7 +29,7 @@ default['asterisk']['manager_permit']      = '127.0.0.1/255.255.255.0'
 default['asterisk']['manager_read_perms']  = %w(system call log verbose command agent user config)
 default['asterisk']['manager_write_perms'] = %w(system call log verbose command agent user config)
 
-#Setup the SIP.conf file, refer to: http://www.voip-info.org/wiki/view/Asterisk+config+sip.conf
+# Setup the SIP.conf file, refer to: http://www.voip-info.org/wiki/view/Asterisk+config+sip.conf
 default['asterisk']['sip_conf_context']              = 'default'
 default['asterisk']['sip_conf_allowguest']           = 'yes'
 default['asterisk']['sip_confallowoverlap']          = 'no'
@@ -86,7 +86,7 @@ default['asterisk']['sip_conf_notifyhold']           = 'yes'
 default['asterisk']['sip_conf_limitonpeers']         = 'yes'
 default['asterisk']['sip_conf_t38pt_udptl']          = 'yes'
 
-#Setup our SIP Providers
+# Setup our SIP Providers
 default['asterisk']['sip_providers'] = Mash.new
 default['asterisk']['sip_providers']['flowroute'] = Mash.new(:type => 'friend', :host => 'sip.flowroute.com', :dtmf_mode => 'rfc2833', :context => 'flowroute', :canreinvite => 'no', :allowed_codecs => ['ulaw', 'g729'], :insecure => 'port,invite', :qualify => 'yes')
 
@@ -106,17 +106,17 @@ default['asterisk']['unimrcp']['rtp_port_min'] = '28000'
 default['asterisk']['unimrcp']['rtp_port_max'] = '29000'
 
 # Path config.  The default bin path is set according to the install method (source vs package)
-default['asterisk']['prefix']['bin']       = nil
-default['asterisk']['prefix']['conf']      = '/etc'
-default['asterisk']['prefix']['state']     = '/var'
+default['asterisk']['prefix']['bin']    = nil
+default['asterisk']['prefix']['conf']   = '/etc'
+default['asterisk']['prefix']['state']  = '/var'
 
-#Install from source settings
+# Install from source settings
 default['asterisk']['source']['packages'] = %w{build-essential libssl-dev libcurl4-openssl-dev libncurses5-dev libnewt-dev libxml2-dev libsqlite3-dev uuid-dev}
 default['asterisk']['source']['version']  = '11.5.1'
 default['asterisk']['source']['checksum'] = 'fefa9def9c8f97c89931f12b29b3ac616ae1a8454c01c524678163061dcb42b2'
 
 # An full download url can be supplied to specify an alternative source tarball location
-default['asterisk']['source']['url']      = nil
+default['asterisk']['source']['url'] = nil
 
 # Should the sample config files be installed?
 default['asterisk']['source']['install_samples'] = true

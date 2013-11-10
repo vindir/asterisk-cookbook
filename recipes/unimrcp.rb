@@ -1,5 +1,5 @@
 case node['platform']
-when "ubuntu","debian"
+when "ubuntu", "debian"
   node['asterisk']['unimrcp']['packages'].each do |pkg|
     package pkg do
       options "--force-yes"

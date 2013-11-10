@@ -1,14 +1,13 @@
-
 [general]
 static=yes
 writeprotect=no
 clearglobalvars=no
 
 [globals]
-CONSOLE=Console/dsp				; Console interface for demo
+CONSOLE=Console/dsp		; Console interface for demo
 IAXINFO=guest					; IAXtel username/password
 TRUNK=Zap/G2					; Trunk interface
-TRUNKMSD=1					; MSD digits to strip (usually 1 or 0)
+TRUNKMSD=1					  ; MSD digits to strip (usually 1 or 0)
 
 [default]
 exten => s,1,Set(CALLERID(name)=${DB(cidname/${CALLERID(num)})})

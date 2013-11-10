@@ -35,14 +35,15 @@ service "asterisk" do
 end
 
 case node['asterisk']['install_method']
-  when 'package'
-    include_recipe 'asterisk::package'
-  when 'source'
-    include_recipe 'asterisk::source'
+when 'package'
+  include_recipe 'asterisk::package'
+when 'source'
+  include_recipe 'asterisk::source'
 end
 
 %w(lib/asterisk spool/asterisk run/asterisk log/asterisk).each do |subdir|
   path = "#{node['asterisk']['prefix']['state']}/#{subdir}"
+
   directory path do
     recursive true
   end
