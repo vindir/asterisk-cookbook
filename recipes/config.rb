@@ -3,7 +3,7 @@ users = search(:asterisk_users) || []
 auth = search(:auth, "id:google") || []
 dialplan_contexts = search(:asterisk_contexts) || []
 
-%w{sip manager modules extensions gtalk jabber}.each do |template_file|
+%w{sip manager modules extensions}.each do |template_file|
   template "/etc/asterisk/#{template_file}.conf" do
     source "#{template_file}.conf.erb"
     mode 0644
