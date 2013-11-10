@@ -1,5 +1,5 @@
-users = search(:asterisk_users) || []
-dialplan_contexts = search(:asterisk_contexts) || []
+users = data_bag(:asterisk_users) || []
+dialplan_contexts = data_bag(:asterisk_contexts) || []
 
 template "#{node['asterisk']['prefix']['conf']}/asterisk/asterisk.conf" do
   source 'asterisk.conf.erb'
