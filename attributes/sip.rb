@@ -1,6 +1,6 @@
 default['asterisk']['sip_conf_context']              = 'default'
 default['asterisk']['sip_conf_allowguest']           = 'yes'
-default['asterisk']['sip_confallowoverlap']          = 'no'
+default['asterisk']['sip_conf_allowoverlap']         = 'no'
 default['asterisk']['sip_conf_allowtransfer']        = 'no'
 default['asterisk']['sip_conf_realm']                = 'mydomain.com'
 default['asterisk']['sip_conf_domain']               = 'mydomain.com'
