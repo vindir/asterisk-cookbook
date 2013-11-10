@@ -15,12 +15,7 @@ service "asterisk" do
     "restart-convenient" => true, "force-reload" => true
 end
 
-case node['asterisk']['install_method']
-when 'package'
-  include_recipe 'asterisk::package'
-when 'source'
-  include_recipe 'asterisk::source'
-end
+include_recipe "asterisk::#{node['asterisk']['install_method']}"
 
 %w(lib/asterisk spool/asterisk run/asterisk log/asterisk).each do |subdir|
   path = "#{node['asterisk']['prefix']['state']}/#{subdir}"
