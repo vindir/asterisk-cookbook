@@ -1,24 +1,33 @@
-#
-# Cookbook Name:: asterisk
-# Recipe:: default
-#
-# Copyright 2011, Chris Peplin
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
+asterisk_user = node['asterisk']['user']
+asterisk_group = node['asterisk']['group']
+
+user asterisk_user do
+  system true
+end
+
+group asterisk_group do
+  system true
+end
 
 service "asterisk" do
   supports :restart => true, :reload => true, :status => :true, :debug => :true,
     "logger-reload" => true, "extensions-reload" => true,
     "restart-convenient" => true, "force-reload" => true
 end
+
+include_recipe "asterisk::#{node['asterisk']['install_method']}"
+
+%w(lib/asterisk spool/asterisk run/asterisk log/asterisk).each do |subdir|
+  path = "#{node['asterisk']['prefix']['state']}/#{subdir}"
+
+  directory path do
+    recursive true
+  end
+
+  execute "#{path} ownership" do
+    command "chown -Rf #{asterisk_user}:#{asterisk_group} #{path}"
+  end
+end
+
+include_recipe 'asterisk::config'
+include_recipe 'asterisk::init'

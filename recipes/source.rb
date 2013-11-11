@@ -1,5 +1,7 @@
+node.default['asterisk']['prefix']['bin'] = "/opt/asterisk-#{node['asterisk']['source']['version']}"
+
 case node['platform']
-when "ubuntu","debian"
+when "ubuntu", "debian"
   node['asterisk']['source']['packages'].each do |pkg|
     package pkg do
       options "--force-yes"
@@ -40,11 +42,11 @@ bash "install_asterisk" do
   code <<-EOH
     tar zxf #{source_path}
     cd asterisk-#{node['asterisk']['source']['version']}
-    ./configure
+    ./configure --prefix=#{node['asterisk']['prefix']['bin']} --sysconfdir=#{node['asterisk']['prefix']['conf']} --localstatedir=#{node['asterisk']['prefix']['state']}
     make
     make install
     make config
     #{'make samples' if node['asterisk']['source']['install_samples']}
   EOH
-  notifies :reload, resources(:service => "asterisk")
+  notifies :reload, resources('service[asterisk]')
 end
