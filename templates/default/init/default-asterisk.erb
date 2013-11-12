@@ -17,7 +17,7 @@ COLOR=yes
 
 # If you want Asterisk to run with a non-default configuration file,
 # uncomment the following option, and set the value appropriately.
-#ALTCONF=/etc/asterisk/asterisk.conf
+ALTCONF="<%= node['asterisk']['prefix']['conf'] %>/asterisk/asterisk.conf"
 
 # In the case of a crash, Asterisk may create a core file.  Uncomment
 # if you want this behavior.

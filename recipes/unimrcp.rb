@@ -86,7 +86,7 @@ bash "ldconfig" do
   code 'ldconfig'
 end
 
-template "/etc/asterisk/mrcp.conf" do
+template "#{node['asterisk']['prefix']['conf']}/asterisk/mrcp.conf" do
   source "mrcp.conf.erb"
   mode 0644
   notifies :reload, resources('service[asterisk]')
