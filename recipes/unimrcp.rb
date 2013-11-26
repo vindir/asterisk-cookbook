@@ -14,13 +14,13 @@ target_dir = node['asterisk']['unimrcp']['install_dir']
 
 apr_src_dir = "#{unimrcp_src_dir}/unimrcp/libs/apr"
 
-remote_file "#{work_dir}/#{unimrcp_name}.tar.gz" do
+remote_file "#{unimrcp_src_dir}/#{unimrcp_name}.tar.gz" do
   source "http://unimrcp.googlecode.com/files/#{unimrcp_name}.tar.gz"
 end
 
 bash "prepare_dir" do
   user "root"
-  cwd work_dir
+  cwd unimrcp_src_dir
   code 'tar -zxf #{unimrcp_name}.tar.gz'
 end
 
@@ -82,7 +82,7 @@ end
 
 bash "ldconfig" do
   user "root"
-  cwd work_dir
+  cwd unimrcp_src_dir
   code 'ldconfig'
 end
 
