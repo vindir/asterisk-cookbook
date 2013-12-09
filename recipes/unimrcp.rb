@@ -8,20 +8,21 @@ when "ubuntu", "debian"
 end
 
 unimrcp_name = "uni-ast-package-#{node['asterisk']['unimrcp']['version']}"
-unimrcp_src_dir = "#{Chef::Config['file_cache_path'] || '/tmp'}/#{unimrcp_name}"
+work_dir = Chef::Config['file_cache_path'] || '/tmp'
+unimrcp_src_dir = "#{work_dir}/#{unimrcp_name}"
 
 target_dir = node['asterisk']['unimrcp']['install_dir']
 
 apr_src_dir = "#{unimrcp_src_dir}/unimrcp/libs/apr"
 
-remote_file "#{unimrcp_src_dir}/#{unimrcp_name}.tar.gz" do
+remote_file "#{work_dir}/#{unimrcp_name}.tar.gz" do
   source "http://unimrcp.googlecode.com/files/#{unimrcp_name}.tar.gz"
 end
 
 bash "prepare_dir" do
   user "root"
-  cwd unimrcp_src_dir
-  code 'tar -zxf #{unimrcp_name}.tar.gz'
+  cwd work_dir
+  code "tar -zxf #{unimrcp_name}.tar.gz"
 end
 
 bash "install_apr" do

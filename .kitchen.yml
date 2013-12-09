@@ -34,3 +34,15 @@ suites:
   attributes: {
     asterisk: {}
   }
+- name: unimrcp-package
+  run_list: ['recipe[asterisk]', 'recipe[asterisk::unimrcp]']
+  attributes: {
+    asterisk: {
+      install_method: 'package'
+    }
+  }
+- name: unimrcp-source
+  run_list: ['recipe[asterisk]', 'recipe[asterisk::unimrcp]']
+  attributes: {
+    asterisk: {}
+  }
