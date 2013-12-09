@@ -1,5 +1,7 @@
 node.default['asterisk']['prefix']['bin'] = "/opt/asterisk-#{node['asterisk']['source']['version']}"
 
+include_recipe 'apt'
+
 case node['platform']
 when "ubuntu", "debian"
   node['asterisk']['source']['packages'].each do |pkg|
