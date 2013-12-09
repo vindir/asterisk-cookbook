@@ -10,7 +10,7 @@ template "#{config_dir}/asterisk.conf" do
   notifies :reload, resources('service[asterisk]')
 end
 
-%w{sip manager modules extensions}.each do |template_file|
+%w{sip manager extensions}.each do |template_file|
   template "#{config_dir}/#{template_file}.conf" do
     source "#{template_file}.conf.erb"
     mode 0644
