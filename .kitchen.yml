@@ -22,6 +22,15 @@ platforms:
     box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_centos-6.4_provisionerless.box
 
 suites:
-- name: default
-  run_list: ["recipe[asterisk]"]
-  attributes:
+- name: package
+  run_list: ['recipe[asterisk]']
+  attributes: {
+    asterisk: {}
+  }
+- name: source
+  run_list: ['recipe[asterisk]']
+  attributes: {
+    asterisk: {
+      install_method: 'source'
+    }
+  }
