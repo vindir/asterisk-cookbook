@@ -1,5 +1,3 @@
-node.default['asterisk']['prefix']['bin'] = "/opt/asterisk-#{node['asterisk']['source']['version']}"
-
 include_recipe 'apt'
 
 case node['platform']
