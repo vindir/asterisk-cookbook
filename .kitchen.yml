@@ -25,12 +25,12 @@ suites:
 - name: package
   run_list: ['recipe[asterisk]']
   attributes: {
-    asterisk: {}
+    asterisk: {
+      install_method: 'package'
+    }
   }
 - name: source
   run_list: ['recipe[asterisk]']
   attributes: {
-    asterisk: {
-      install_method: 'source'
-    }
+    asterisk: {}
   }
