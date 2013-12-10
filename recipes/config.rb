@@ -1,5 +1,9 @@
-users = data_bag(:asterisk_users) || []
-dialplan_contexts = data_bag(:asterisk_contexts) || []
+def data_bag_items(bag_name)
+  data_bag(bag_name).map { |id| data_bag_item bag_name, id }
+end
+
+users = data_bag_items(:asterisk_users)
+dialplan_contexts = data_bag_items(:asterisk_contexts)
 config_dir = "#{node['asterisk']['prefix']['conf']}/asterisk"
 
 directory config_dir
