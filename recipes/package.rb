@@ -1,5 +1,3 @@
-node.default['asterisk']['prefix']['bin'] = '/usr'
-
 case node['platform']
 when 'ubuntu', 'debian'
   apt_repository 'asterisk' do

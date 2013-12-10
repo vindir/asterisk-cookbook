@@ -1,4 +1,4 @@
-default['asterisk']['unimrcp']['version'] = '1.0.0'
+default['asterisk']['unimrcp']['version'] = '1.1.0'
 default['asterisk']['unimrcp']['packages'] = %w{pkg-config build-essential}
 default['asterisk']['unimrcp']['install_dir'] = '/usr/local/unimrcp'
 default['asterisk']['unimrcp']['server_ip'] = '192.168.10.14'

@@ -1,81 +1,129 @@
-Description
-===========
+# Asterisk cookbook
 
-Installs Asterisk 1.8 on Debian/Ubuntu and configures it to accept incoming and
-outgoing calls for a single Google Voice number.
+This Chef cookbook installs Asterisk either from source or packages and configures its basic settings. It also optionally installs the UniMRCP module. It is intended that this cookbook remain small and perform only installation tasks, with downstream cookbooks depending on it to configure Asterisk for more specific tasks.
 
-Changes
-=======
+# Requirements
 
-## v0.4.0:
+Tested on Ubuntu 12.04 and Debian 7.1.
 
-* Add documentation and a check to make sure we're in Ubuntu/Debian
+# Usage
 
-## v0.3.0:
+Add `recipe[asterisk]` to your node's run list. Optionally add `recipe[asterisk::unimrcp]`.
 
-* Initial version, tested on Ubuntu only
+# Attributes
 
-Requirements
-============
+* `node['asterisk']['install_method']` - the method by which to install Asterisk. May be `package` or `source`. This choice determines other applicable parameters. (default `source`)
+* `node['asterisk']['user']` - the user as which to run Asterisk (default `asterisk`)
+* `node['asterisk']['group']` - the group as which to run Asterisk (default `asterisk`)
+* `node['asterisk']['prefix']['bin']` - the prefix at which Asterisk is installed (default `/usr`)
+* `node['asterisk']['prefix']['conf']` - the prefix at which Asterisk configuration is located (default `/etc`)
+* `node['asterisk']['prefix']['state']` - the path at which Asterisk's runtime state located (default `/var`)
 
-## Platform:
+## Source install attributes
+* `node['asterisk']['source']['packages']` - the packages to be installed on which compilation depends (default `%w{build-essential libssl-dev libcurl4-openssl-dev libncurses5-dev libnewt-dev libxml2-dev libsqlite3-dev uuid-dev}`)
+* `node['asterisk']['source']['version']` - the version of Asterisk to install (default `11.5.1`)
+* `node['asterisk']['source']['checksum']` - the checksum of the source distribution (default `fefa9def9c8f97c89931f12b29b3ac616ae1a8454c01c524678163061dcb42b2`)
+* `node['asterisk']['source']['url']` - the url from which to download Asterisk (default `nil`)
+* `node['asterisk']['source']['install_samples']` - wether or not to install sample config (default `true`)
 
-* Ubuntu and Debian, 64 bit (amd64/x86\_64)
+## Package install attributes
+* `node['asterisk']['package']['names']` - the Asterisk packages to install (default `%w(asterisk asterisk-dev)`)
+* `node['asterisk']['package']['repo']['enable']` - if the Asterisk official repository should be enabled (default `false`)
+* `node['asterisk']['package']['repo']['url']` - the URL of the Asterisk official repo (default `http://packages.asterisk.org/deb`)
+* `node['asterisk']['package']['repo']['distro']` - the distro to select from the repo (default `node['lsb']['codename']`)
+* `node['asterisk']['package']['repo']['branches']` - the branches of the repo to import (default `%w(main)`)
+* `node['asterisk']['package']['repo']['keyserver']` - the keyserver against which to auth the repo (default `pgp.mit.edu`)
+* `node['asterisk']['package']['repo']['key']` - the repo's public GPG key (default `175E41DF`)
 
-Other platforms can be used but you'll need to modify the default recipe.
+## SIP attributes
+* `node['asterisk']['sip']['context']` - (default `'default'`)
+* `node['asterisk']['sip']['allowguest']` - (default `'yes'`)
+* `node['asterisk']['sip']['allowoverlap']` - (default `'no'`)
+* `node['asterisk']['sip']['allowtransfer']` - (default `'no'`)
+* `node['asterisk']['sip']['realm']` - (default `'mydomain.com'`)
+* `node['asterisk']['sip']['domain']` - (default `'mydomain.com'`)
+* `node['asterisk']['sip']['bindport']` - (default `5060`)
+* `node['asterisk']['sip']['bindaddr']` - (default `'0.0.0.0'`)
+* `node['asterisk']['sip']['tcpenable']` - (default `'yes'`)
+* `node['asterisk']['sip']['srvlookup']` - (default `'yes'`)
+* `node['asterisk']['sip']['pedantic']` - (default `'yes'`)
+* `node['asterisk']['sip']['tos_sip']` - (default `'cs3'`)
+* `node['asterisk']['sip']['tos_audio']` - (default `'ef'`)
+* `node['asterisk']['sip']['tos_video']` - (default `'af41'`)
+* `node['asterisk']['sip']['maxexpiry']` - (default `'3600'`)
+* `node['asterisk']['sip']['minexpiry']` - (default `60`)
+* `node['asterisk']['sip']['defaultexpiry']` - (default `120`)
+* `node['asterisk']['sip']['t1min']` - (default `100`)
+* `node['asterisk']['sip']['notifymimetype']` - (default `'text/plain'`)
+* `node['asterisk']['sip']['checkmwi']` - (default `10`)
+* `node['asterisk']['sip']['buggymwi']` - (default `'no'`)
+* `node['asterisk']['sip']['vmexten']` - (default `'voicemail'`)
+* `node['asterisk']['sip']['disallow']` - (default `'all'`)
+* `node['asterisk']['sip']['allow']` - (default `%w(ulaw gsm ilbc speex)`)
+* `node['asterisk']['sip']['mohinterpret']` - (default `'default'`)
+* `node['asterisk']['sip']['mohsuggest']` - (default `'default'`)
+* `node['asterisk']['sip']['language']` - (default `'en'`)
+* `node['asterisk']['sip']['relaxdtmf']` - (default `'yes'`)
+* `node['asterisk']['sip']['trustrpid']` - (default `'no'`)
+* `node['asterisk']['sip']['sendrpid']` - (default `'yes'`)
+* `node['asterisk']['sip']['progressinband']` - (default `'never'`)
+* `node['asterisk']['sip']['useragent']` - (default `'Asterisk with Adhearsion'`)
+* `node['asterisk']['sip']['promiscredir']` - (default `'no'`)
+* `node['asterisk']['sip']['usereqphone']` - (default `'no'`)
+* `node['asterisk']['sip']['dtmfmode']` - (default `'rfc2833'`)
+* `node['asterisk']['sip']['compactheaders']` - (default `'yes'`)
+* `node['asterisk']['sip']['videosupport']` - (default `'yes'`)
+* `node['asterisk']['sip']['maxcallbitrate']` - (default `384`)
+* `node['asterisk']['sip']['callevents']` - (default `'no'`)
+* `node['asterisk']['sip']['alwaysauthreject']` - (default `'yes'`)
+* `node['asterisk']['sip']['g726nonstandard']` - (default `'yes'`)
+* `node['asterisk']['sip']['matchexterniplocally']` - (default `'yes'`)
+* `node['asterisk']['sip']['regcontext']` - (default `'sipregistrations'`)
+* `node['asterisk']['sip']['rtptimeout']` - (default `60`)
+* `node['asterisk']['sip']['rtpholdtimeout']` - (default `300`)
+* `node['asterisk']['sip']['rtpkeepalive']` - (default `60`)
+* `node['asterisk']['sip']['sipdebug']` - (default `'yes'`)
+* `node['asterisk']['sip']['recordhistory']` - (default `'yes'`)
+* `node['asterisk']['sip']['dumphistory']` - (default `'yes'`)
+* `node['asterisk']['sip']['allowsubscribe']` - (default `'no'`)
+* `node['asterisk']['sip']['subscribecontext']` - (default `'default'`)
+* `node['asterisk']['sip']['notifyringing']` - (default `'yes'`)
+* `node['asterisk']['sip']['notifyhold']` - (default `'yes'`)
+* `node['asterisk']['sip']['limitonpeers']` - (default `'yes'`)
+* `node['asterisk']['sip']['t38pt_udptl']` - (default `'yes'`)
+* `node['asterisk']['public_ip']` - the public IP Asterisk listens on (default `node['ec2'] ? node['ec2']['public_ipv4'] : node['ipaddress']`)
 
-Attributes
-==========
+## Manager attributes
+* `node['asterisk']['manager']['enabled']` - wether or not to enable AMI (default `yes`)
+* `node['asterisk']['manager']['port']` - the port on which to listen for AMI connections (default `5038`)
+* `node['asterisk']['manager']['ip_address']` - the IP address on which to accept AMI connections (default `127.0.0.1`)
+* `node['asterisk']['manager']['webenabled']` - enable AMI web connections (default `yes`)
+* `node['asterisk']['manager']['timestampevents']` - wether or not to timestamp AMI events (default `yes`)
+* `node['asterisk']['manager']['username']` - the username with which to authenticate AMI connections (default `manager`)
+* `node['asterisk']['manager']['password']` - the password with which to authenticate AMI connections (default `password`)
+* `node['asterisk']['manager']['deny']` - the ACL to deny access to (default `0.0.0.0/0.0.0.0`)
+* `node['asterisk']['manager']['permit']` - the ACL to allow access to (default `127.0.0.1/255.255.255.0`)
+* `node['asterisk']['manager']['read_perms']` - the AMI event classes to send to this user (default `%w(system call log verbose command agent user config)`)
+* `node['asterisk']['manager']['write_perms']` - the AMI command classes to allow for this user (default `%w(system call log verbose command agent user config)`)
 
-There are a number of attributes defined in the cookbook, but the defaults are
-pretty sane. You probably don't need to change any of them to get a working
-setup.
+## UniMRCP attributes
+* `node['asterisk']['unimrcp']['version']` - the version of UniMRCP to install (default `1.0.0'`)
+* `node['asterisk']['unimrcp']['packages'] - the UniMRCP package dependencies to install (default %w{pkg-config build-essential}`)
+* `node['asterisk']['unimrcp']['install_dir']` - the directory in which to install UniMRCP (default `/usr/local/unimrcp'`)
+* `node['asterisk']['unimrcp']['server_ip']` - the IP of the MRCP server to connect to (default `192.168.10.14'`)
+* `node['asterisk']['unimrcp']['server_port']` - the MRCP server port to connect to (default `5060'`)
+* `node['asterisk']['unimrcp']['client_ip']` - the IP of the MRCP client (default `192.168.10.11'`)
+* `node['asterisk']['unimrcp']['client_port']` - the MRCP client port (default `25097'`)
+* `node['asterisk']['unimrcp']['rtp_ip']` - the client RTP IP to listen on (default `192.168.10.11'`)
+* `node['asterisk']['unimrcp']['rtp_port_min']` - the minimum RTP port (default `28000'`)
+* `node['asterisk']['unimrcp']['rtp_port_max']` - the maximum RTP port (default `29000'`)
 
-However, you'll need to configure two data bags. The `asterisk` data bag should
-contain your desired Asterisk accounts (I've only tested it with one) defined
-like this:
+# Recipes
 
-    id:         <your desired username>
-    data_bag:   asterisk
-    extension:  <the extension # for your PBX line, I just use 101>
-    full_name:  <full display name>
-    password:   <your desired password>
-    username:   <your desired username>
+* `asterisk` - Fetches and installs Asterisk
+* `asterisk::unimrcp` - Fetches and installs mod_unimrcp
 
-Your Google account should be configured in a more general `auth` data bag. I
-keep this separate from the Asterisk config because it's also used by other
-cookbooks in my system. My `auth` data bag is where I keep credentials info for
-all third-party accounts. The `auth` data bag must contian a `google` object
-like this:
+# Author
 
-    id:        google
-    username:  <your Google username>@gmail.com
-    password:  <your Google password>
+[Ben Langfeld](@benlangfeld)
 
-Usage
-=====
-
-Include the asterisk default recipe in a role run list.
-
-    name "role_for_asterisk"
-    run_list("recipe[asterisk]")
-
-Once Asterisk is installed, you should be able to open any SIP client (like
-Ekiga in Ubuntu) and connect to it using the account you set up in the
-`asterisk` data bag.
-
-License and Author
-==================
-
-* Copyright 2011, Christopher Peplin <chris.peplin@rhubarbtech.com>
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and

@@ -1,4 +1,4 @@
-node.default['asterisk']['prefix']['bin'] = "/opt/asterisk-#{node['asterisk']['source']['version']}"
+include_recipe 'apt'
 
 case node['platform']
 when "ubuntu", "debian"
@@ -48,5 +48,6 @@ bash "install_asterisk" do
     make config
     #{'make samples' if node['asterisk']['source']['install_samples']}
   EOH
+  not_if "test -f #{node['asterisk']['prefix']['bin']}/sbin/asterisk"
   notifies :reload, resources('service[asterisk]')
 end
