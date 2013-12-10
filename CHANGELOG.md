@@ -1,5 +1,8 @@
 # develop
 
+# 0.2.2
+  * More sensible IP address attribute defaults
+
 # 0.2.1
   * Fix and test building SIP peers and dialplan contexts from databags without search
 
