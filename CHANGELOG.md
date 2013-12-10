@@ -1,5 +1,8 @@
 # develop
 
+# 0.2.1
+  * Fix and test building SIP peers and dialplan contexts from databags without search
+
 # 0.2.0
   * Better testing and documentation
   * No longer test on CentOS until someone asks for it
