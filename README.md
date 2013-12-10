@@ -4,7 +4,7 @@ This Chef cookbook installs Asterisk either from source or packages and configur
 
 # Requirements
 
-Tested on Ubuntu 12.04, Debian 7.1 and CentOS 6.5.
+Tested on Ubuntu 12.04 and Debian 7.1.
 
 # Usage
 

@@ -16,11 +16,6 @@ platforms:
   driver_config:
     box: debian
     box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_debian-7.1.0_provisionerless.box
-- name: centos-6.4
-  driver_config:
-    box: opscode-centos-6.4
-    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_centos-6.4_provisionerless.box
-
 suites:
 - name: package
   run_list: ['recipe[asterisk]']

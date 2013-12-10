@@ -14,6 +14,3 @@ depends 'yum', '~> 2.4'
 
 supports 'debian', '>= 7.1'
 supports 'ubuntu', '>= 10.04'
-%w{ redhat centos scientific amazon }.each do |os|
-  supports os, '>= 6.4'
-end
