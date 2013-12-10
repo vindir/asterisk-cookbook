@@ -21,8 +21,8 @@ Add `recipe[asterisk]` to your node's run list. Optionally add `recipe[asterisk:
 
 ## Source install attributes
 * `node['asterisk']['source']['packages']` - the packages to be installed on which compilation depends (default `%w{build-essential libssl-dev libcurl4-openssl-dev libncurses5-dev libnewt-dev libxml2-dev libsqlite3-dev uuid-dev}`)
-* `node['asterisk']['source']['version']` - the version of Asterisk to install (default `11.5.1`)
-* `node['asterisk']['source']['checksum']` - the checksum of the source distribution (default `fefa9def9c8f97c89931f12b29b3ac616ae1a8454c01c524678163061dcb42b2`)
+* `node['asterisk']['source']['version']` - the version of Asterisk to install (default `11.6.0`)
+* `node['asterisk']['source']['checksum']` - the checksum of the source distribution (default `80aa523bdaab71ce419022d8c851aaeda718dc5bbf5fe8cb99786da546dd8cee`)
 * `node['asterisk']['source']['url']` - the url from which to download Asterisk (default `nil`)
 * `node['asterisk']['source']['install_samples']` - wether or not to install sample config (default `true`)
 
@@ -107,7 +107,7 @@ Add `recipe[asterisk]` to your node's run list. Optionally add `recipe[asterisk:
 * `node['asterisk']['manager']['write_perms']` - the AMI command classes to allow for this user (default `%w(system call log verbose command agent user config)`)
 
 ## UniMRCP attributes
-* `node['asterisk']['unimrcp']['version']` - the version of UniMRCP to install (default `1.0.0'`)
+* `node['asterisk']['unimrcp']['version']` - the version of UniMRCP to install (default `1.1.0'`)
 * `node['asterisk']['unimrcp']['packages'] - the UniMRCP package dependencies to install (default %w{pkg-config build-essential}`)
 * `node['asterisk']['unimrcp']['install_dir']` - the directory in which to install UniMRCP (default `/usr/local/unimrcp'`)
 * `node['asterisk']['unimrcp']['server_ip']` - the IP of the MRCP server to connect to (default `192.168.10.14'`)
