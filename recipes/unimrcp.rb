@@ -15,14 +15,18 @@ target_dir = node['asterisk']['unimrcp']['install_dir']
 
 apr_src_dir = "#{unimrcp_src_dir}/unimrcp/libs/apr"
 
+check_module = 'asterisk -x "module show like unimrcp" | grep "2 modules loaded"'
+
 remote_file "#{work_dir}/#{unimrcp_name}.tar.gz" do
   source "http://unimrcp.googlecode.com/files/#{unimrcp_name}.tar.gz"
+  not_if check_module
 end
 
 bash "prepare_dir" do
   user "root"
   cwd work_dir
   code "tar -zxf #{unimrcp_name}.tar.gz"
+  not_if check_module
 end
 
 bash "install_apr" do
@@ -33,6 +37,7 @@ bash "install_apr" do
     make
     make install
   EOH
+  not_if 'test -f /usr/local/unimrcp/lib/libapr-1.a'
 end
 
 bash "install_apr_util" do
@@ -43,6 +48,7 @@ bash "install_apr_util" do
     make
     make install
   EOH
+  not_if 'test -f /usr/local/unimrcp/lib/libaprutil-1.a'
 end
 
 bash "install_sofia" do
@@ -53,6 +59,7 @@ bash "install_sofia" do
     make
     make install
   EOH
+  not_if 'test -f /usr/local/lib/libsofia-sip-ua.a'
 end
 
 bash "install_unimrcp" do
@@ -63,6 +70,7 @@ bash "install_unimrcp" do
     make
     make install
   EOH
+  not_if 'test -f /usr/local/unimrcp/lib/libunimrcpclient.a'
 end
 
 directory "/var/lib/asterisk/documentation/thirdparty" do
@@ -79,12 +87,14 @@ bash "install_asterisk_modules" do
     make
     make install
   EOH
+  not_if check_module
 end
 
 bash "ldconfig" do
   user "root"
   cwd unimrcp_src_dir
   code 'ldconfig'
+  not_if check_module
 end
 
 template "#{node['asterisk']['prefix']['conf']}/asterisk/mrcp.conf" do
