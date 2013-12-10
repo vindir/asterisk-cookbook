@@ -1,5 +1,8 @@
 # develop
 
+# 0.2.3
+  * Don't recompile UniMRCP after it's already successfully built
+
 # 0.2.2
   * More sensible IP address attribute defaults
 
