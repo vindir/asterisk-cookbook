@@ -96,7 +96,7 @@ Add `recipe[asterisk]` to your node's run list. Optionally add `recipe[asterisk:
 ## Manager attributes
 * `node['asterisk']['manager']['enabled']` - wether or not to enable AMI (default `yes`)
 * `node['asterisk']['manager']['port']` - the port on which to listen for AMI connections (default `5038`)
-* `node['asterisk']['manager']['ip_address']` - the IP address on which to accept AMI connections (default `127.0.0.1`)
+* `node['asterisk']['manager']['ip_address']` - the IP address on which to accept AMI connections (default `node['ec2'] ? node['ec2']['public_ipv4'] : node['ipaddress']`)
 * `node['asterisk']['manager']['webenabled']` - enable AMI web connections (default `yes`)
 * `node['asterisk']['manager']['timestampevents']` - wether or not to timestamp AMI events (default `yes`)
 * `node['asterisk']['manager']['username']` - the username with which to authenticate AMI connections (default `manager`)
@@ -110,11 +110,11 @@ Add `recipe[asterisk]` to your node's run list. Optionally add `recipe[asterisk:
 * `node['asterisk']['unimrcp']['version']` - the version of UniMRCP to install (default `1.1.0'`)
 * `node['asterisk']['unimrcp']['packages'] - the UniMRCP package dependencies to install (default %w{pkg-config build-essential}`)
 * `node['asterisk']['unimrcp']['install_dir']` - the directory in which to install UniMRCP (default `/usr/local/unimrcp'`)
-* `node['asterisk']['unimrcp']['server_ip']` - the IP of the MRCP server to connect to (default `192.168.10.14'`)
+* `node['asterisk']['unimrcp']['server_ip']` - the IP of the MRCP server to connect to (default `127.0.0.1`)
 * `node['asterisk']['unimrcp']['server_port']` - the MRCP server port to connect to (default `5060'`)
-* `node['asterisk']['unimrcp']['client_ip']` - the IP of the MRCP client (default `192.168.10.11'`)
+* `node['asterisk']['unimrcp']['client_ip']` - the IP of the MRCP client (default `node['ec2'] ? node['ec2']['public_ipv4'] : node['ipaddress']`)
 * `node['asterisk']['unimrcp']['client_port']` - the MRCP client port (default `25097'`)
-* `node['asterisk']['unimrcp']['rtp_ip']` - the client RTP IP to listen on (default `192.168.10.11'`)
+* `node['asterisk']['unimrcp']['rtp_ip']` - the client RTP IP to listen on (default `node['ec2'] ? node['ec2']['public_ipv4'] : node['ipaddress']`)
 * `node['asterisk']['unimrcp']['rtp_port_min']` - the minimum RTP port (default `28000'`)
 * `node['asterisk']['unimrcp']['rtp_port_max']` - the maximum RTP port (default `29000'`)
 

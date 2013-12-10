@@ -1,7 +1,7 @@
 # [general]
 default['asterisk']['manager']['enabled']         = 'yes'
 default['asterisk']['manager']['port']            = 5038
-default['asterisk']['manager']['ip_address']      = '127.0.0.1'
+default['asterisk']['manager']['ip_address']      = node['ec2'] ? node['ec2']['public_ipv4'] : node['ipaddress']
 default['asterisk']['manager']['webenabled']      = 'yes'
 default['asterisk']['manager']['timestampevents'] = 'yes'
 
