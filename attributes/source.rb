@@ -1,6 +1,6 @@
 default['asterisk']['source']['packages'] = %w{build-essential libssl-dev libcurl4-openssl-dev libncurses5-dev libnewt-dev libxml2-dev libsqlite3-dev uuid-dev}
-default['asterisk']['source']['version']  = '11.6.0'
-default['asterisk']['source']['checksum'] = '80aa523bdaab71ce419022d8c851aaeda718dc5bbf5fe8cb99786da546dd8cee'
+default['asterisk']['source']['version']  = '11-current'
+default['asterisk']['source']['checksum'] = nil
 
 # An full download url can be supplied to specify an alternative source tarball location
 default['asterisk']['source']['url'] = nil
