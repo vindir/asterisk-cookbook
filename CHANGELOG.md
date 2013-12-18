@@ -1,5 +1,8 @@
 # develop
 
+# 0.2.4
+  * Install latest Asterisk from source
+
 # 0.2.3
   * Don't recompile UniMRCP after it's already successfully built
 
