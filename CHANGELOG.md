@@ -1,4 +1,5 @@
 # develop
+  * Allow configuring AMI event filters via attributes
 
 # 0.2.4
   * Install latest Asterisk from source

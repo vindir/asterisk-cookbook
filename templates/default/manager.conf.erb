@@ -15,3 +15,6 @@ deny = <%= node['asterisk']['manager']['deny'] %>
 permit = <%= node['asterisk']['manager']['permit'] %>
 read = <%= node['asterisk']['manager']['read_perms'].join(",") %>
 write = <%= node['asterisk']['manager']['write_perms'].join(",") %>
+<% node['asterisk']['manager']['event_filters'].each do |f| %>
+eventfilter = <%= f %>
+<% end %>
