@@ -12,3 +12,4 @@ default['asterisk']['manager']['deny']        = '0.0.0.0/0.0.0.0'
 default['asterisk']['manager']['permit']      = '127.0.0.1/255.255.255.0'
 default['asterisk']['manager']['read_perms']  = %w(system call log verbose command agent user config)
 default['asterisk']['manager']['write_perms'] = %w(system call log verbose command agent user config)
+default['asterisk']['manager']['event_filters'] = []
