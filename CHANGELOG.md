@@ -1,4 +1,5 @@
 # develop
+  * Ensure sox is installed for mixing recordings
 
 # 0.2.5
   * Allow configuring AMI event filters via attributes
