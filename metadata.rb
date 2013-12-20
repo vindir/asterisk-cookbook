@@ -10,7 +10,6 @@ recipe 'asterisk', 'Install Asterisk and configure'
 recipe 'asterisk::unimrcp', 'Install Asterisk UniMRCP plugin and configure'
 
 depends 'apt', '~> 2.2'
-depends 'yum', '~> 2.4'
 
 supports 'debian', '>= 7.1'
 supports 'ubuntu', '>= 10.04'
