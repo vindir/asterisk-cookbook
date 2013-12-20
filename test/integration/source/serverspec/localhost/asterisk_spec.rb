@@ -40,4 +40,12 @@ context=adhearsion
       )
     }
   end
+
+  describe package('sox') do
+    it { should be_installed }
+  end
+
+  describe command('sox --version') do
+    it { should return_exit_status 0 }
+  end
 end
