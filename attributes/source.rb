@@ -1,4 +1,4 @@
-default['asterisk']['source']['packages'] = %w{build-essential libssl-dev libcurl4-openssl-dev libncurses5-dev libnewt-dev libxml2-dev libsqlite3-dev uuid-dev}
+default['asterisk']['source']['packages'] = %w{build-essential libssl-dev libcurl4-openssl-dev libncurses5-dev libnewt-dev libxml2-dev libsqlite3-dev uuid-dev sox}
 default['asterisk']['source']['version']  = '11-current'
 default['asterisk']['source']['checksum'] = nil
 
