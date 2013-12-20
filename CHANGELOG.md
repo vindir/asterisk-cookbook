@@ -1,4 +1,6 @@
 # develop
+
+# 0.2.6
   * Ensure sox is installed for mixing recordings
 
 # 0.2.5
