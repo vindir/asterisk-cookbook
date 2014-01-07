@@ -1,9 +1,9 @@
 [general]
-static=<%= ['asterisk']['extensions']['static'] %>
-writeprotect=<%= ['asterisk']['extensions']['writeprotect'] %>
-autofallthrough=<%= ['asterisk']['extensions']['autofallthrough'] %>
-clearglobalvars=<%= ['asterisk']['extensions']['clearglobalvars'] %>
-priorityjumping=<%= ['asterisk']['extensions']['priorityjumping'] %>
+static=<%= node['asterisk']['extensions']['static'] %>
+writeprotect=<%= node['asterisk']['extensions']['writeprotect'] %>
+autofallthrough=<%= node['asterisk']['extensions']['autofallthrough'] %>
+clearglobalvars=<%= node['asterisk']['extensions']['clearglobalvars'] %>
+priorityjumping=<%= node['asterisk']['extensions']['priorityjumping'] %>
 
 <% @dialplan_contexts.each do |context| %>
 [<%= context['name'] %>]
